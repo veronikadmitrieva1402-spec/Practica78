@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Окно регистрации</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --coffee-dark: #3E2723;
+            --coffee: #5D4037;
+            --coffee-medium: #6B4F4A;
+            --coffee-light: #8B6B61;
+            --cream: #F5F0E6;
+            --cream-dark: #E8D9CD;
+            --brown-light: #A58B7F;
+            --sage: #7D8F69;
+        }
+
+        body {
+            background: var(--coffee);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            padding: 20px 0 0 0;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .auth-card {
+            background: var(--cream);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            border: 2px solid var(--coffee-light);
+        }
+
+        .auth-header {
+            background: var(--coffee-dark);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--coffee-light);
+        }
+
+        .auth-header h2 {
+            color: var(--cream);
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-header i {
+            font-size: 3.5rem;
+            color: var(--cream);
+            margin-bottom: 10px;
+            background: var(--coffee-medium);
+            padding: 15px;
+            border-radius: 50%;
+            border: 3px solid var(--cream);
+        }
+
+        .auth-body {
+            padding: 30px 25px;
+            background: var(--cream);
+        }
+
+        .form-title {
+            text-align: center;
+            color: var(--coffee-dark);
+            font-size: 1.5rem;
+            margin: 0 0 20px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--coffee-light);
+            font-weight: 600;
+        }
+
+        .form-title i {
+            color: var(--coffee);
+            margin-right: 10px;
+            font-size: 1.8rem;
+            vertical-align: middle;
+        }
+
+        .login-form,
+        .register-form {
+            margin-bottom: 30px;
+            background: var(--cream);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .register-form {
+            padding-top: 25px;
+            background: var(--cream);
+        }
+
+        .input-field {
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .input-field i {
+            position: absolute;
+            left: 15px;
+            top: 14px;
+            color: var(--coffee);
+            font-size: 1.4rem;
+            z-index: 1;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 14px 14px 14px 50px;
+            border: 2px solid var(--coffee-light);
+            border-radius: 40px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            box-sizing: border-box;
+            background: white;
+            color: var(--coffee-dark);
+        }
+
+        .input-field input:focus {
+            border-color: var(--coffee-dark);
+            box-shadow: 0 0 0 4px rgba(93, 64, 55, 0.2);
+            background: white;
+        }
+
+        .input-field label {
+            position: absolute;
+            left: 50px;
+            top: -10px;
+            background: var(--cream);
+            padding: 0 8px;
+            font-size: 0.85rem;
+            color: var(--coffee-dark);
+            font-weight: 600;
+            border-radius: 10px;
+        }
+
+        .checkbox-field {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checkbox-field input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--coffee);
+        }
+
+        .checkbox-field label {
+            color: var(--coffee-dark);
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .checkbox-field a {
+            color: var(--coffee);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dashed var(--coffee-light);
+        }
+
+        .checkbox-field a:hover {
+            color: var(--coffee-dark);
+            border-bottom: 1px solid var(--coffee-dark);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--coffee);
+            color: var(--cream);
+        }
+
+        .btn-primary:hover {
+            background: var(--sage);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(62, 39, 35, 0.4);
+            border-color: var(--cream);
+        }
+
+        .btn-success {
+            background: var(--coffee-medium);
+            color: var(--cream);
+        }
+
+        .btn-success:hover {
+            background: var(--sage);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(93, 64, 55, 0.5);
+            border-color: var(--cream);
+        }
+
+        .social-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .social-section p {
+            color: var(--coffee-dark);
+            position: relative;
+            margin: 25px 0;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .social-section p:before,
+        .social-section p:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 2px;
+            background: var(--coffee-light);
+        }
+
+        .social-section p:before {
+            left: 0;
+        }
+
+        .social-section p:after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: white;
+            font-weight: 600;
+            border: 2px solid transparent;
+        }
+
+        .social-btn i {
+            font-size: 1.3rem;
+        }
+
+        .vk-btn {
+            background: #4C75A3;
+        }
+
+        .google-btn {
+            background: #ec6559;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .forgot-link {
+            text-align: right;
+            margin: 15px 0;
+        }
+
+        .forgot-link a {
+            color: var(--coffee);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-bottom: 1px dashed var(--coffee-light);
+            padding-bottom: 2px;
+        }
+
+        .forgot-link a:hover {
+            color: var(--coffee-dark);
+            border-bottom: 1px solid var(--coffee-dark);
+        }
+
+        .back-home {
+            display: inline-flex;
+            align-items: center;
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .back-home:hover {
+            background: var(--sage);
+            transform: translateX(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-home i {
+            font-size: 1.3rem;
+        }
+
+        .page-footer {
+            background: var(--coffee-dark) !important;
+            margin-top: 70px;
+            padding-top: 40px;
+            border-top: 5px solid var(--sage);
+            width: 100vw;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            color: var(--cream);
+            font-size: 1.1rem;
+        }
+
+        .footer-contact i {
+            margin-right: 15px;
+            color: var(--sage);
+            font-size: 22px;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons i {
+            font-size: 28px;
+            margin: 0 15px;
+            color: var(--cream);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icons i:hover {
+            color: var(--sage);
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
+            background: rgba(0,0,0,0.3) !important;
+            margin-top: 30px;
+            padding: 15px  !important;
+            color: var(--cream) !important;
+            text-align: center;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .social-buttons {
+                flex-direction: column;
+            }
+
+            .auth-header i {
+                font-size: 2.5rem;
+                padding: 12px;
+            }
+
+            .auth-header h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <a href="../index.html" class="back-home">
+            <i class="material-icons">arrow_back</i> На главную
+        </a>
+
+        <div class="auth-card">
+            <div class="auth-header">
+                <i class="material-icons">menu_book</i>
+                <h2>BookMarket</h2>
+            </div>
+
+            <div class="auth-body">
+                <div class="login-form">
+                    <div class="form-title">
+                        <i class="material-icons">login</i> Вход
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons">email</i>
+                        <input type="email" id="login-email" placeholder=" ">
+                        <label for="login-email">Email</label>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons">lock</i>
+                        <input type="password" id="login-password" placeholder=" ">
+                        <label for="login-password">Пароль</label>
+                    </div>
+
+                    <div class="checkbox-field">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Запомнить меня</label>
+                    </div>
+
+                    <div class="forgot-link">
+                        <a href="#">Забыли пароль?</a>
+                    </div>
+
+                    <button class="btn btn-primary">
+                        <i class="material-icons">login</i> Войти
+                    </button>
+                </div>
+
+                <div class="register-form">
+                    <div class="form-title">
+                        <i class="material-icons">person_add</i> Регистрация
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons">person</i>
+                        <input type="text" id="reg-name" placeholder=" ">
+                        <label for="reg-name">Имя</label>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons">email</i>
+                        <input type="email" id="reg-email" placeholder=" ">
+                        <label for="reg-email">Email</label>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons">lock</i>
+                        <input type="password" id="reg-password" placeholder=" ">
+                        <label for="reg-password">Пароль</label>
+                    </div>
+
+                    <div class="input-field">
+                        <i class="material-icons">lock_outline</i>
+                        <input type="password" id="reg-password-confirm" placeholder=" ">
+                        <label for="reg-password-confirm">Подтвердите пароль</label>
+                    </div>
+
+                    <div class="checkbox-field">
+                        <input type="checkbox" id="agree">
+                        <label for="agree">Я принимаю <a href="#">условия использования</a></label>
+                    </div>
+
+                    <button class="btn btn-success">
+                        <i class="material-icons">person_add</i> Зарегистрироваться
+                    </button>
+                </div>
+
+                <div class="social-section">
+                    <p>или войдите через</p>
+                    <div class="social-buttons">
+                        <button class="social-btn vk-btn">
+                            <i class="fab fa-vk"></i> ВКонтакте
+                        </button>
+                        <button class="social-btn google-btn">
+                            <i class="fab fa-google"></i> Google
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">BookMarket</h5>
+                    <p class="grey-text text-lighten-4">Книжный маркетплейс. Более 50 000 книг в наличии.</p>
+                    <div class="footer-contact">
+                        <p><i class="material-icons">phone</i> +7 (999) 100-49-67</p>
+                        <p><i class="material-icons">email</i> market@bookmarket.ru</p>
+                        <p><i class="material-icons">location_on</i> г. Москва, ул. Книжная, д. 1</p>
+                    </div>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Мы в соцсетях</h5>
+                    <div class="social-icons">
+                        <i class="fab fa-vk"></i>
+                        <i class="fab fa-telegram"></i>
+                        <i class="fab fa-youtube"></i>
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h5 class="white-text" style="margin-top: 30px;">Режим работы</h5>
+                    <p class="grey-text text-lighten-4">Пн-Пт: 9:00 - 21:00<br>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2026 BookMarket - Все права защищены
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
