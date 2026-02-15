@@ -577,7 +577,7 @@
 
     <div class="category-header">
         <div class="container">
-            <i class="material-icons">menu_book</i>
+            <i class="material-icons">toys</i>
             <h1>Детская литература</h1>
             <p>Волшебный мир для самых маленьких. Сказки, приключения, фэнтези и познавательные истории ждут преданных читателей.</p>
         </div>
@@ -991,6 +991,53 @@
             </div>
         </div>
     </footer>
+
+    <div id="simple-child"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;"></div>
+
+    <script>
+        function createSimpleFlower() {
+            const container = document.getElementById('simple-child');
+
+            const flower = document.createElement('div');
+
+            flower.innerHTML = '🌸';
+
+            const size = Math.random() * 30 + 20;
+            const startX = Math.random() * window.innerWidth;
+            const duration = Math.random() * 8 + 5;
+
+            flower.style.cssText = `
+                position: absolute;
+                left: ${startX}px;
+                top: -50px;
+                font-size: ${size}px;
+                opacity: ${Math.random() * 0.5 + 0.3};
+                transform: rotate(${Math.random() * 360}deg);
+                animation: fall ${duration}s linear forwards;
+                filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+            `
+
+            container.appendChild(flower);
+
+            setTimeout(() => {
+                flower.remove();
+            }, duration * 1000);
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(${Math.random() * 720}deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        setInterval(createSimpleFlower, 500);
+    </script>
 
 </body>
 
