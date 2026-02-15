@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Страница не найдена | BookMarket</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --coffee-dark: #3E2723;   
+            --coffee: #5D4037;        
+            --coffee-light: #8B6B61;   
+            --cream: #F5F0E6;            
+            --cream-dark: #E8D9CD;      
+            --sage: #7D8F69;            
+        }
+
+        body {
+            background-color: var(--cream);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Навигация */
+        nav {
+            background-color: var(--coffee-dark) !important;
+            height: 80px !important;
+            line-height: 80px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            height: 80px !important;
+        }
+
+        .brand-logo {
+            font-size: 2rem !important;
+            color: var(--cream) !important;
+            position: relative !important;
+            left: 0 !important;
+            transform: none !important;
+            white-space: nowrap;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-right: 40px;
+            line-height: 80px !important;
+        }
+
+        .left-group {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .catalog-wrapper {
+            position: relative;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .catalog-btn {
+            color: var(--cream) !important;
+            padding: 0 25px !important;
+            height: 50px !important;
+            line-height: 50px !important;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            display: flex !important;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .catalog-btn:hover {
+            background-color: var(--sage) !important;
+            transform: translateY(-1px);
+        }
+
+        .catalog-btn i {
+            margin-left: 8px;
+            font-size: 20px;
+        }
+
+        .catalog-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            background: var(--cream);
+            box-shadow: 0 8px 25px rgba(62, 39, 35, 0.4);
+            z-index: 1000;
+            border-radius: 15px;
+            border: 1px solid var(--cream-dark);
+            padding: 15px;
+            min-width: 800px;
+            white-space: nowrap;
+        }
+
+        .catalog-menu a {
+            display: inline-block;
+            padding: 12px 22px;
+            color: var(--coffee-dark);
+            transition: all 0.3s;
+            border-radius: 40px;
+            margin: 0 5px;
+            font-weight: 500;
+            background: var(--cream-dark);
+            border: 1px solid transparent;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .catalog-menu a:hover {
+            background: var(--sage);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(93, 64, 55, 0.4);
+        }
+
+        .catalog-menu a i {
+            margin-right: 8px;
+            color: var(--coffee);
+            vertical-align: middle;
+            font-size: 18px;
+        }
+
+        .catalog-menu a:hover i {
+            color: white;
+        }
+
+        .catalog-wrapper:hover .catalog-menu {
+            display: block;
+        }
+
+        .search-wrapper {
+            width: 400px;
+            position: relative;
+            margin-left: 10px;
+        }
+
+        .search-wrapper i {
+            position: absolute !important;
+            left: 18px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            color: var(--coffee);
+            font-size: 22px !important;
+            z-index: 2;
+        }
+
+        .search-wrapper input {
+            width: 100%;
+            height: 50px !important;
+            background: var(--cream) !important;
+            border: 2px solid var(--coffee-light) !important;
+            border-radius: 30px;
+            padding-left: 55px !important;
+            padding-right: 25px !important;
+            margin: 0 !important;
+            color: var(--coffee-dark);
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-wrapper input:focus {
+            border-color: var(--coffee) !important;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.3);
+            background: white !important;
+        }
+
+        .right-group {
+            display: flex;
+            align-items: center;
+            margin-left: 30px;
+            gap: 5px;
+        }
+
+        .nav-icons a {
+            color: var(--cream) !important;
+            width: 50px !important;
+            height: 50px !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .nav-icons a:hover {
+            background-color: var(--sage) !important;
+            transform: translateY(-3px);
+        }
+
+        .nav-icons i {
+            font-size: 26px;
+        }
+
+        /* 404 страница */
+        .error-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .error-content {
+            text-align: center;
+            max-width: 600px;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(62, 39, 35, 0.2);
+            border: 2px solid var(--cream-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Декоративные элементы */
+        .error-content::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: var(--cream);
+            border-radius: 50%;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .error-content::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: var(--cream-dark);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .error-number {
+            font-size: 12rem;
+            font-weight: 800;
+            color: var(--coffee-dark);
+            line-height: 1;
+            margin-bottom: 20px;
+            text-shadow: 8px 8px 0 var(--cream-dark);
+            position: relative;
+            z-index: 1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .error-number span {
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .error-number span:nth-child(1) { animation-delay: 0s; }
+        .error-number span:nth-child(2) { animation-delay: 0.2s; }
+        .error-number span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            color: var(--coffee);
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .error-text {
+            font-size: 1.2rem;
+            color: var(--coffee-light);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .error-divider {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--coffee), var(--sage));
+            margin: 30px auto;
+            border-radius: 2px;
+        }
+
+        .error-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .error-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .error-btn-primary {
+            background: var(--coffee);
+            color: white;
+        }
+
+        .error-btn-primary:hover {
+            background: var(--coffee-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(62, 39, 35, 0.3);
+            border-color: var(--cream);
+        }
+
+        .error-btn-secondary {
+            background: var(--cream);
+            color: var(--coffee);
+            border: 2px solid var(--coffee-light);
+        }
+
+        .error-btn-secondary:hover {
+            background: var(--cream-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(93, 64, 55, 0.2);
+            border-color: var(--coffee);
+        }
+
+        .error-btn i {
+            font-size: 1.3rem;
+        }
+
+        /* Книжная полка (декор) */
+        .bookshelf {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 40px 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .book-spine {
+            width: 30px;
+            height: 120px;
+            background: var(--coffee);
+            border-radius: 5px 5px 0 0;
+            transform: skewX(-5deg);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .book-spine:nth-child(1) { background: var(--coffee-dark); height: 140px; animation-delay: 0.1s; }
+        .book-spine:nth-child(2) { background: var(--coffee); height: 110px; animation-delay: 0.2s; }
+        .book-spine:nth-child(3) { background: var(--coffee-light); height: 160px; animation-delay: 0.3s; }
+        .book-spine:nth-child(4) { background: var(--sage); height: 130px; animation-delay: 0.4s; }
+        .book-spine:nth-child(5) { background: var(--coffee-dark); height: 120px; animation-delay: 0.5s; }
+        .book-spine:nth-child(6) { background: var(--coffee); height: 150px; animation-delay: 0.6s; }
+        .book-spine:nth-child(7) { background: var(--coffee-light); height: 100px; animation-delay: 0.7s; }
+
+        .book-spine::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 5px;
+            width: 4px;
+            height: 20px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: skewX(-5deg) translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: skewX(-5deg) translateY(0);
+            }
+        }
+
+        /* Поиск на странице 404 */
+        .error-search {
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .error-search input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid var(--cream-dark);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .error-search input:focus {
+            border-color: var(--coffee);
+            box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.2);
+        }
+
+        .error-search i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--coffee-light);
+            font-size: 1.3rem;
+        }
+
+        /* Футер */
+        .page-footer {
+            background: var(--coffee-dark) !important;
+            margin-top: 70px;
+            padding-top: 40px;
+            border-top: 5px solid var(--sage);
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            color: var(--cream);
+            font-size: 1.1rem;
+        }
+
+        .footer-contact i {
+            margin-right: 15px;
+            color: var(--sage);
+            font-size: 22px;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons i {
+            font-size: 28px;
+            margin: 0 15px;
+            color: var(--cream);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icons i:hover {
+            color: var(--sage);
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
+            background: rgba(0,0,0,0.3) !important;
+            margin-top: 30px;
+            padding: 15px  !important;
+            color: var(--cream) !important;
+            text-align: center;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .error-number {
+                font-size: 8rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-content {
+                padding: 40px 20px;
+            }
+            
+            .error-buttons {
+                flex-direction: column;
+            }
+            
+            .error-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media only screen and (max-width: 480px) {
+            .error-number {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 1.6rem;
+            }
+            
+            .error-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Навигация -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="index.html" class="brand-logo">BookMarket</a>
+
+                <div class="left-group hide-on-med-and-down">
+                    <div class="catalog-wrapper">
+                        <a class="catalog-btn" href="#!">
+                            Каталог<i class="material-icons">arrow_drop_down</i>
+                        </a>
+                        
+                        <div class="catalog-menu">
+                            <a href="classic.html"><i class="material-icons">menu_book</i> Классика</a>
+                            <a href="childcare.html"><i class="material-icons">child_care</i> Детская</a>
+                            <a href="science.html"><i class="material-icons">science</i> Научная</a>
+                            <a href="modernproza.html"><i class="material-icons">favorite</i> Современная проза</a>
+                            <a href="psychology.html"><i class="material-icons">psychology</i> Психология</a>
+                            <a href="horror.html"><i class="material-icons">dangerous</i> Ужасы</a>
+                            <a href="fantasy.html"><i class="material-icons">bolt</i> Фэнтези</a>
+                            <a href="detective.html"><i class="material-icons">search</i> Детектив</a>
+                        </div>
+                    </div>
+
+                    <div class="search-wrapper">
+                        <i class="material-icons">search</i>
+                        <input type="text" placeholder="Поиск...">
+                    </div>
+                </div>
+
+                <div class="right-group hide-on-med-and-down">
+                    <div class="nav-icons">
+                        <a href="cart.html"><i class="material-icons">shopping_cart</i></a>
+                    </div>
+                    <div class="nav-icons">
+                        <a href="favorite.html"><i class="material-icons">favorite</i></a>
+                    </div>
+                    <div class="nav-icons">
+                        <a href="register.html"><i class="material-icons">account_circle</i></a>
+                    </div>
+                </div>
+
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger right">
+                    <i class="material-icons white-text">menu</i>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- 404 Контент -->
+    <div class="error-container">
+        <div class="error-content">
+            <div class="error-number">
+                <span>4</span>
+                <span>0</span>
+                <span>4</span>
+            </div>
+            
+            <h1 class="error-title">Страница не найдена</h1>
+            
+            <div class="bookshelf">
+                <div class="book-spine"></div>
+                <div class="book-spine"></div>
+                <div class="book-spine"></div>
+                <div class="book-spine"></div>
+                <div class="book-spine"></div>
+                <div class="book-spine"></div>
+                <div class="book-spine"></div>
+            </div>
+            
+            <p class="error-text">
+                Кажется, эта страница потерялась среди книжных полок.<br>
+                Возможно, она была перемещена или никогда не существовала.
+            </p>
+            
+            <div class="error-divider"></div>
+            
+            <div class="error-buttons">
+                <a href="index.html" class="error-btn error-btn-primary">
+                    <i class="material-icons">home</i> На главную
+                </a>
+                <a href="javascript:history.back()" class="error-btn error-btn-secondary">
+                    <i class="material-icons">arrow_back</i> Вернуться назад
+                </a>
+            </div>
+            
+            <div class="error-search">
+                <i class="material-icons">search</i>
+                <input type="text" placeholder="Поиск книг...">
+            </div>
+            
+            <p style="margin-top: 30px; color: var(--coffee-light); font-size: 0.9rem;">
+                Или воспользуйтесь каталогом выше ☕
+            </p>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">BookMarket</h5>
+                    <p class="grey-text text-lighten-4">Книжный маркетплейс. Более 50 000 книг в наличии.</p>
+                    <div class="footer-contact">
+                        <p><i class="material-icons">phone</i> +7 (999) 100-49-67</p>
+                        <p><i class="material-icons">email</i> market@bookmarket.ru</p>
+                        <p><i class="material-icons">location_on</i> г. Москва, ул. Книжная, д. 1</p>
+                    </div>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Мы в соцсетях</h5>
+                    <div class="social-icons">
+                        <i class="fab fa-vk"></i>
+                        <i class="fab fa-telegram"></i>
+                        <i class="fab fa-youtube"></i>
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h5 class="white-text" style="margin-top: 30px;">Режим работы</h5>
+                    <p class="grey-text text-lighten-4">Пн-Пт: 9:00 - 21:00<br>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2026 BookMarket - Все права защищены
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sideNav = document.querySelectorAll('.sidenav');
+            M.Sidenav.init(sideNav);
+        });
+    </script>
+</body>
+
+</html>
